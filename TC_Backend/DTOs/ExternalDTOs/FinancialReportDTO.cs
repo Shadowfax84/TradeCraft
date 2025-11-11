@@ -1,18 +1,8 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace TC_Backend.Models
+namespace TC_Backend.DTOs.ExternalDTOs
 {
-    public class FinancialReport
-    {
-        [Key]
-        public Guid FinancialReportId { get; set; } = Guid.NewGuid();
-        [MaxLength(100)]
-        public string? ReportLabel { get; set; }
-        [Required]
-        [MaxLength(20)]
-        [ForeignKey(nameof(CompanyList))]
-        public string TickerSymbol { get; set; } = null!;
+    public class FinancialReportDTO
+    {        
+        public string? TickerSymbol { get; set; } = null!;
         public decimal? TotalRevenue { get; set; }
         public decimal? CostOfRevenue { get; set; }
         public decimal? GrossProfit { get; set; }

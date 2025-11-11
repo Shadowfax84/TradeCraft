@@ -8,7 +8,14 @@ namespace TC_Backend.Models
         public int RoleId { get; set; }
         [Required]
         [MaxLength(20)]
-        public string RoleName { get; set; } = null!;
+        private string _roleName = null!;
+
+        public string RoleName
+        {
+            get => _roleName;
+            set => _roleName = (value ?? "Investor").ToLower();
+
+        } 
         [Range(0, 9999)]
         public int RequiredPoints { get; set; }
         [Range(1,3)]

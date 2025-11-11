@@ -1,14 +1,16 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TC_Backend.Models
 {
     public class CompanyProfile
     {
         [Key]
-        public Guid CPId { get; set; } = Guid.NewGuid();
+        public Guid CPId { get; set; }
 
         [Required]
         [MaxLength(20)]
+        [ForeignKey(nameof(CompanyList))]
         public string TickerSymbol { get; set; } = null!;
 
         public string? Address { get; set; }

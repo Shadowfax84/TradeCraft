@@ -8,7 +8,7 @@ namespace TC_Backend.Models
         public Guid ProgressID { get; set; } = Guid.NewGuid();
 
         [Required]
-        public Guid UserID { get; set; } 
+        public string UserID { get; set; } = null!;
 
         [Required]
         public Guid ModuleID { get; set; } 

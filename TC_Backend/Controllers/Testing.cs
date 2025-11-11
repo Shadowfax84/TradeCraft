@@ -11,7 +11,7 @@ namespace TC_Backend.Controllers
         [HttpGet]
         public async Task Run(IYahooFinanceService yahooService)
         {
-            var profile = await yahooService.GetProfileAsync("AAPL");
+            var profile = await yahooService.GetProfileAsync("BEL.NS");
 
             Console.WriteLine($"Address: {profile.Adress}");
             Console.WriteLine($"Sector: {profile.Sector}");

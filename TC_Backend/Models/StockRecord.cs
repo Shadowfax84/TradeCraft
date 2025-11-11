@@ -10,7 +10,7 @@ namespace TC_Backend.Models
 
         [Required]
         [MaxLength(20)]
-        [ForeignKey(nameof(CompanyProfile))]
+        [ForeignKey(nameof(CompanyList))]
         public string TickerSymbol { get; set; } = null!;
 
         public DateTime Date { get; set; }
