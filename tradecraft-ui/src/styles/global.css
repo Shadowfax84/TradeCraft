@@ -1,0 +1,437 @@
+/* Global Styles - Dark Theme for TradeCraft */
+
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+/* ============================================
+   CSS Variables for Dark Theme
+   ============================================ */
+:root {
+  /* Dark Mode Colors */
+  --bg-primary: #121212;
+  --bg-secondary: #1e1e1e;
+  --bg-tertiary: #242424;
+  --bg-hover: #2d2d2d;
+
+  /* Text Colors */
+  --text-primary: #ffffff;
+  --text-secondary: #b0bec5;
+  --text-tertiary: #90a4ae;
+
+  /* Accent Colors - Cyan & Orange */
+  --accent-cyan: #00bcd4;
+  --accent-orange: #ff9800;
+  --accent-cyan-dark: #0a3d62;
+  --accent-orange-dark: #e65100;
+
+  /* Other Colors */
+  --border-color: #2d2d2d;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --error-color: #f44336;
+  --info-color: #2196f3;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  /* Typography */
+  --font-family: 'Roboto', 'Segoe UI', sans-serif;
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 24px;
+  --font-size-2xl: 32px;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  --shadow-md: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.10);
+  --shadow-xl: 0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  font-size: var(--font-size-md);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   Typography
+   ============================================ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: var(--font-size-2xl);
+}
+
+h2 {
+  font-size: var(--font-size-xl);
+}
+
+h3 {
+  font-size: var(--font-size-lg);
+}
+
+p {
+  margin-bottom: var(--spacing-md);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+a {
+  color: var(--accent-cyan);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: var(--accent-orange);
+  text-decoration: underline;
+}
+
+/* ============================================
+   Angular Material Overrides - Dark Theme
+   ============================================ */
+
+/* Toolbar (Navbar & Footer) */
+.mat-toolbar {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+}
+
+.mat-toolbar-single-row {
+  padding: var(--spacing-md) var(--spacing-lg) !important;
+}
+
+/* Buttons */
+.mat-button,
+.mat-icon-button,
+.mat-raised-button,
+.mat-stroked-button,
+.mat-flat-button {
+  color: var(--text-primary) !important;
+}
+
+.mat-raised-button {
+  background-color: var(--accent-cyan) !important;
+  color: #000 !important;
+  font-weight: 600;
+}
+
+.mat-raised-button:hover {
+  background-color: #00acc1 !important;
+}
+
+.mat-raised-button[color='accent'] {
+  background-color: var(--accent-orange) !important;
+  color: #fff !important;
+}
+
+.mat-raised-button[color='accent']:hover {
+  background-color: var(--accent-orange-dark) !important;
+}
+
+/* Menu */
+.mat-menu-panel {
+  background-color: var(--bg-secondary) !important;
+  box-shadow: var(--shadow-lg);
+}
+
+.mat-menu-item {
+  color: var(--text-primary) !important;
+}
+
+.mat-menu-item:hover {
+  background-color: var(--bg-hover) !important;
+}
+
+/* Form Controls */
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-form-field-label {
+  color: var(--text-secondary) !important;
+}
+
+.mat-input-element {
+  color: var(--text-primary) !important;
+  caret-color: var(--accent-cyan);
+}
+
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: var(--accent-cyan) !important;
+}
+
+.mat-form-field-underline {
+  background-color: var(--border-color) !important;
+}
+
+.mat-form-field.mat-focused .mat-form-field-underline {
+  background-color: var(--accent-cyan) !important;
+}
+
+/* Cards */
+.mat-card {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+/* Dialog */
+.mat-dialog-container {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Divider */
+.mat-divider {
+  border-top-color: var(--border-color) !important;
+}
+
+/* Tabs */
+.mat-tab-label {
+  color: var(--text-secondary) !important;
+  min-width: 160px;
+}
+
+.mat-tab-label.mat-tab-label-active {
+  color: var(--accent-cyan) !important;
+}
+
+.mat-tab-body-wrapper {
+  background-color: var(--bg-secondary);
+}
+
+.mat-tab-header {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.mat-ink-bar {
+  background-color: var(--accent-cyan) !important;
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-accent {
+  color: var(--accent-cyan);
+}
+
+.text-success {
+  color: var(--success-color);
+}
+
+.text-warning {
+  color: var(--warning-color);
+}
+
+.text-error {
+  color: var(--error-color);
+}
+
+.bg-primary {
+  background-color: var(--bg-primary);
+}
+
+.bg-secondary {
+  background-color: var(--bg-secondary);
+}
+
+.bg-tertiary {
+  background-color: var(--bg-tertiary);
+}
+
+.rounded {
+  border-radius: var(--radius-md);
+}
+
+.rounded-sm {
+  border-radius: var(--radius-sm);
+}
+
+.rounded-lg {
+  border-radius: var(--radius-lg);
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
+
+.shadow {
+  box-shadow: var(--shadow-md);
+}
+
+.shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+.shadow-xl {
+  box-shadow: var(--shadow-xl);
+}
+
+/* ============================================
+   Scrollbar Styling
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-cyan);
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease;
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease;
+}
+
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ============================================
+   Responsive Utilities
+   ============================================ */
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: var(--font-size-xl);
+  }
+
+  h2 {
+    font-size: var(--font-size-lg);
+  }
+
+  body {
+    font-size: var(--font-size-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: var(--font-size-lg);
+  }
+
+  h2 {
+    font-size: var(--font-size-md);
+  }
+
+  body {
+    font-size: var(--font-size-xs);
+  }
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+
+@media print {
+  body {
+    background-color: white;
+    color: black;
+  }
+
+  .no-print {
+    display: none;
+  }
+}
