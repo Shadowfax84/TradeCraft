@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
 using TC_Backend.DTOs;
 using TC_Backend.Services.Interfaces;
 
@@ -60,6 +62,22 @@ namespace TC_Backend.Controllers
 
             _logger.LogInformation("Login successful for email {Email}", loginDto.Email);
             return Ok(new { Token = token });
+        }
+
+        [HttpGet("profile/{userId}")]
+        public async Task<ActionResult<UserProfileDTO>> GetProfile(Guid userId)
+        {
+            _logger.LogInformation("Profile request for userId: {UserId}", userId);
+
+            var profile = await _userService.GetUserProfileAsync(userId);
+            if (profile == null)
+            {
+                _logger.LogWarning("Profile not found for userId: {UserId}", userId);
+                return NotFound("User profile not found.");
+            }
+
+            _logger.LogInformation("Profile retrieved successfully for userId: {UserId}", userId);
+            return Ok(profile);
         }
     }
 }

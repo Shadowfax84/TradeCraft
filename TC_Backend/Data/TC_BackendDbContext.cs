@@ -17,6 +17,9 @@ namespace TC_Backend.Data
         public DbSet<GameSubModule> GameSubModules { get; set; } 
         public DbSet<UserProgress> UserProgresses { get; set; }
         public DbSet<UserFile> UserFiles { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Trade> Trades { get; set; }
+        public DbSet<Holdings> Holdings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -131,6 +134,63 @@ namespace TC_Backend.Data
                 .HasForeignKey(uf => uf.UserId)
                 .HasPrincipalKey(u => u.Id)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // Order relationships
+            modelBuilder.Entity<Order>()
+                .HasOne<User>()
+                .WithMany()
+                .HasForeignKey(o => o.UserID)
+                .HasPrincipalKey(u => u.Id)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Order>()
+                .HasOne<CompanyList>()
+                .WithMany()
+                .HasForeignKey(o => o.TickerSymbol)
+                .HasPrincipalKey(cl => cl.TickerSymbol)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Trade relationships
+            modelBuilder.Entity<Trade>()
+                .HasOne<User>()
+                .WithMany()
+                .HasForeignKey(t => t.BuyerUserId)
+                .HasPrincipalKey(u => u.Id)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Trade>()
+                .HasOne<User>()
+                .WithMany()
+                .HasForeignKey(t => t.SellerUserId)
+                .HasPrincipalKey(u => u.Id)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Trade>()
+                .HasOne<CompanyList>()
+                .WithMany()
+                .HasForeignKey(t => t.TickerSymbol)
+                .HasPrincipalKey(cl => cl.TickerSymbol)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Holdings relationships
+            modelBuilder.Entity<Holdings>()
+                .HasOne<User>()
+                .WithMany()
+                .HasForeignKey(h => h.UserId)
+                .HasPrincipalKey(u => u.Id)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Holdings>()
+                .HasOne<CompanyList>()
+                .WithMany()
+                .HasForeignKey(h => h.TickerSymbol)
+                .HasPrincipalKey(cl => cl.TickerSymbol)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Composite unique key for Holdings (UserId + TickerSymbol)
+            modelBuilder.Entity<Holdings>()
+                .HasIndex(h => new { h.UserId, h.TickerSymbol })
+                .IsUnique();
         }
     }
 }

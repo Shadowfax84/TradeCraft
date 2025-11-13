@@ -151,5 +151,42 @@ namespace TC_Backend.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
+
+        public async Task<UserProfileDTO?> GetUserProfileAsync(Guid userId)
+        {
+            try
+            {
+                _logger.LogDebug("Getting user profile for userId: {UserId}", userId);
+
+                var user = await _userManager.FindByIdAsync(userId.ToString());
+                if (user == null)
+                {
+                    _logger.LogWarning("User with ID {UserId} not found", userId);
+                    return null;
+                }
+
+                var profileDto = _userMapping.MapUserToProfileDto(user);
+                if (profileDto == null)
+                {
+                    _logger.LogError("Failed to map user to profile DTO for userId: {UserId}", userId);
+                    return null;
+                }
+
+                // Get role name
+                var role = await _roleRepo.GetRoleById(user.RoleID);
+                if (role != null)
+                {
+                    profileDto.RoleName = role.RoleName;
+                }
+
+                _logger.LogInformation("Successfully retrieved user profile for userId: {UserId}", userId);
+                return profileDto;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting user profile for userId: {UserId}", userId);
+                return null;
+            }
+        }
     }
 }

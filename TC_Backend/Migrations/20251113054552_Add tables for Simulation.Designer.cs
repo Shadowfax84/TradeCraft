@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TC_Backend.Data;
 
@@ -11,9 +12,11 @@ using TC_Backend.Data;
 namespace TC_Backend.Migrations
 {
     [DbContext(typeof(TC_BackendDbContext))]
-    partial class TC_BackendDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251113054552_Add tables for Simulation")]
+    partial class AddtablesforSimulation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -112,5 +112,75 @@ namespace TC_Backend.Helpers
                 return null;
             }
         }
+
+        /// <summary>
+        /// Maps User entity to UserProfileDTO.
+        /// Note: RoleName is ignored as it's not available in User entity (only RoleID).
+        /// </summary>
+        public UserProfileDTO? MapUserToProfileDto(User? user)
+        {
+            try
+            {
+                _logger.LogDebug("Starting mapping from User entity to UserProfileDTO");
+
+                if (user == null)
+                {
+                    _logger.LogWarning("User entity is null, returning null");
+                    return null;
+                }
+
+                var dto = new UserProfileDTO
+                {
+                    UserName = user.UserName ?? string.Empty,
+                    Email = user.Email ?? string.Empty,
+                    LastLogin = user.LastLogin,
+                    ProfilePictureUrl = user.ProfilePictureUrl
+                    // RoleName is ignored - will be set by service layer
+                };
+
+                _logger.LogDebug("Successfully mapped User entity to UserProfileDTO");
+                return dto;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error mapping User entity to UserProfileDTO");
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Maps UserProfileDTO to User entity.
+        /// Note: RoleName is ignored as User entity uses RoleID.
+        /// </summary>
+        public User? MapProfileDtoToUser(UserProfileDTO? dto)
+        {
+            try
+            {
+                _logger.LogDebug("Starting mapping from UserProfileDTO to User entity");
+
+                if (dto == null)
+                {
+                    _logger.LogWarning("UserProfileDTO is null, returning null");
+                    return null;
+                }
+
+                var user = new User
+                {
+                    UserName = dto.UserName,
+                    Email = dto.Email,
+                    LastLogin = dto.LastLogin ?? DateTime.UtcNow,
+                    ProfilePictureUrl = dto.ProfilePictureUrl
+                    // RoleName is ignored - RoleID should be set separately
+                };
+
+                _logger.LogDebug("Successfully mapped UserProfileDTO to User entity");
+                return user;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error mapping UserProfileDTO to User entity");
+                return null;
+            }
+        }
     }
 }
